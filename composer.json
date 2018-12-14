@@ -1,0 +1,12 @@
+{
+    "require": {
+        "slim/slim": "^3.0",
+	"slim/twig-view": "^1",
+        "tuupola/slim-basic-auth": "3.0.0-rc.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "vendor/girls/"
+        }
+    }
+}
