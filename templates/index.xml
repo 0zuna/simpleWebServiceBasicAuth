@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuracion>
+	<ruta ruta="http://187.247.253.5/external/services/jsons/jsons.php"></ruta>
+	<cliente clie="historicos" nombre="Historicos">
+	{% for button in buttons %}
+		<boton id="{{button['id']}}" nombre="{{button['text']}}" tablero="{{clienta}}"></boton>
+	{% endfor %}
+		<parametros>
+			<personaje name="per">idboton</personaje>
+			<fecha name="f">{{"now"|date('Y-m-d')}}</fecha>
+			<circulacion name="cir">
+				<categoriaweb>3</categoriaweb>
+				<df>2</df>
+				<estados>1</estados>
+			</circulacion>
+			<tipo name="tip">
+				<periodicos>1</periodicos>
+				<revistas>2</revistas>
+			</tipo>
+		</parametros>
+	</cliente>
+</configuracion>
