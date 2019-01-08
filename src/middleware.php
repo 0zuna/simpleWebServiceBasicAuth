@@ -1,7 +1,7 @@
 <?php
 
 $app->add(new Tuupola\Middleware\HttpBasicAuthentication([
-	"secure" => true,
+	"secure" => false,
 	"users" => [
 		"root" => "toor"
 	],

@@ -1,7 +1,7 @@
 <?php
 	return [
 		'settings'=>[
-			'displayErrorDetails' => false,
+			'displayErrorDetails' => true,
 			'addContentLengthHeader' => false,
 			/*'logger' => [
 				'name' => 'slim-app',

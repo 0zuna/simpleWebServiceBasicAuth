@@ -9,7 +9,7 @@ $app = new \Slim\App($settings);
 require __DIR__ . '/src/dependencies.php';
 require __DIR__ . '/src/middleware.php';
 
-$app->get('/xml/{name}', function (Request $request, Response $response, array $args) {
+$app->post('/xml/{name}', function (Request $request, Response $response, array $args) {
 	$clienta = $args['name'];
 	/*return $response->withStatus(200)
 	->withHeader('Content-Type', 'application/xml')
@@ -30,6 +30,15 @@ $app->post('/data', function (Request $request, Response $response, array $args)
 	$sk=Hanni::love($request->getParsedBody(),$this->sakura);
 	$response = $this->response->withHeader( 'Content-type', 'application/json');
 	$response->getBody()->write(json_encode($sk,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
+	return $response;
+
+});
+$app->post('/list', function (Request $request, Response $response, array $args){
+	$sakura=$this->sakura->prepare("select alias from boards inner join rol_board on boards.id=rol_board.board_id where rol_id=8");
+	$sakura->execute();
+	$boards=$sakura->fetchAll();
+	$response = $this->response->withHeader( 'Content-type', 'application/json');
+	$response->getBody()->write(json_encode($boards,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
 	return $response;
 
 });

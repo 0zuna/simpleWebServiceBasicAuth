@@ -24,10 +24,10 @@ $container['view'] = function ($c) {
 	$view->addExtension(new \Slim\Views\TwigExtension($router, $uri));
 	return $view;
 };
-$container['errorHandler'] = function ($c) {
+/*$container['errorHandler'] = function ($c) {
 	return function ($request, $response, $exception) use ($c) {
 		return $response->withStatus(500)
 			->withHeader('Content-Type', 'application/json')
 			->write(json_encode(['message'=>'no autorizado','error'=>'n_n'],JSON_PRETTY_PRINT));
 	};
-};
+};*/
