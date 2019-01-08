@@ -42,4 +42,31 @@ $app->post('/list', function (Request $request, Response $response, array $args)
 	return $response;
 
 });
+$app->post('/medios', function (Request $request, Response $response, array $args){
+	$estado=$request->getParsedBody()['estado'];
+	$tipo=$request->getParsedBody()['tipo'];
+	if($tipo=='web'){
+		$sakura=$this->sakura->prepare("select periodicos.Nombre,periodicos.Tiraje,circulacion.tipo as circulacion
+			from periodicos
+			inner join estados on periodicos.Estado=estados.idEstado
+			inner join circulacion on periodicos.circulacion=circulacion.idCirculacion
+			where 
+			estados.Nombre like '$estado' and periodicos.Nombre like '%web%'");
+	}
+	else{
+		$sakura=$this->sakura->prepare("select periodicos.Nombre,periodicos.Tiraje,circulacion.tipo as circulacion
+			from periodicos
+			inner join estados on periodicos.Estado=estados.idEstado
+			inner join tipodocumento on periodicos.tipo=tipodocumento.idTipo
+			inner join circulacion on periodicos.circulacion=circulacion.idCirculacion
+			where 
+			estados.Nombre like '$estado' and
+			tipodocumento.nombre='$tipo'");
+	}
+	$sakura->execute();
+	$boards=$sakura->fetchAll();
+	$response = $this->response->withHeader( 'Content-type', 'application/json');
+	$response->getBody()->write(json_encode($boards,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
+	return $response;
+});
 $app->run();
